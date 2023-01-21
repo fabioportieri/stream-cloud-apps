@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>transform-processor</artifactId>
+	<version>${revision}</version>
+	<name>transform-processor</name>
+	<description>transform processor apps</description>
+	<packaging>jar</packaging>
+
+	<parent>
+		<groupId>org.springframework.cloud.stream.app</groupId>
+		<artifactId>stream-applications-core</artifactId>
+		<version>3.2.1</version>
+		<relativePath/>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud.fn</groupId>
+			<artifactId>spel-function</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dataflow-apps-docs-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dataflow-apps-generator-plugin</artifactId>
+				<configuration>
+					<application>
+						<name>transform</name>
+						<type>processor</type>
+						<version>${project.version}</version>
+						<configClass>org.springframework.cloud.fn.spel.SpelFunctionConfiguration.class</configClass>
+						<functionDefinition>byteArrayTextToString|spelFunction</functionDefinition>
+						<maven>
+							<dependencies>
+								<dependency>
+									<groupId>org.springframework.cloud.fn</groupId>
+									<artifactId>spel-function</artifactId>
+								</dependency>
+							</dependencies>
+						</maven>
+					</application>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

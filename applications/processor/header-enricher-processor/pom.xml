@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>header-enricher-processor</artifactId>
+    <name>header-enricher-processor</name>
+    <description>header-enricher processor apps</description>
+    <version>${revision}</version>
+
+    <parent>
+        <groupId>org.springframework.cloud.stream.app</groupId>
+        <artifactId>stream-applications-core</artifactId>
+        <version>3.2.1</version>
+        <relativePath/>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud.fn</groupId>
+            <artifactId>header-enricher-function</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-test-support</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dataflow-apps-docs-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dataflow-apps-generator-plugin</artifactId>
+                <configuration>
+                    <application>
+                        <name>header-enricher</name>
+                        <type>processor</type>
+                        <version>${project.version}</version>
+                        <configClass>org.springframework.cloud.fn.header.enricher.HeaderEnricherFunctionConfiguration.class</configClass>
+                        <functionDefinition>headerEnricherFunction</functionDefinition>
+                        <maven>
+                            <dependencies>
+                                <dependency>
+                                    <groupId>org.springframework.cloud.fn</groupId>
+                                    <artifactId>header-enricher-function</artifactId>
+                                </dependency>
+                            </dependencies>
+                        </maven>
+                    </application>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
